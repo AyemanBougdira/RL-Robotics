@@ -1,66 +1,36 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RL Robotics Setup and Configuration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-        h1, h2 {
-            color: #4CAF50;
-        }
-        pre {
-            background-color: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, monospace;
-            font-size: 1rem;
-        }
-    </style>
-</head>
-<body>
+conda create -y -n RLrobotics python=3.10
+conda activate RLrobotics
 
-    <h1>RL Robotics Setup and Configuration</h1>
-
-    <p>Ce guide explique comment configurer l'environnement RL Robotics et corriger l'erreur <code>unrecognized attribute: 'convexhull'</code> dans le fichier <code>pick_place_cube.xml</code>.</p>
-
-    <h2>Étape 1 : Configuration de l'environnement</h2>
-
-    <p>1. <strong>Créer un environnement Conda</strong> :</p>
-    <pre><code>conda create -y -n RLrobotics python=3.10
-conda activate RLrobotics</code></pre>
-
-    <p>2. Installer les bibliothèques nécessaires :</p>
-    <pre><code>pip install gym stable-baselines3
+pip install gym stable-baselines3
 pip install rl_zoo3
 pip install imageio[ffmpeg]
-pip install imageio[pyav]</code></pre>
+pip install imageio[pyav]
 
-    <h2>Étape 2 : Correction de l'erreur convexhull</h2>
-    <p>L'erreur <code>unrecognized attribute: 'convexhull'</code> provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.</p>
 
-    <h3>Localisation du fichier XML</h3>
-    <p>Imprimer le chemin du package <code>gym_lowcostrobot</code> : Lancez ce code Python dans votre terminal Python :</p>
-    <pre><code>import gym_lowcostrobot
+
+Étape 2 : Correction de l'erreur convexhull
+L'erreur unrecognized attribute: 'convexhull' provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.
+
+Localisation du fichier XML
+Imprimer le chemin du package gym_lowcostrobot : Lancez ce code Python dans votre terminal Python
+
+import gym_lowcostrobot
 import os
 
 # Affiche le chemin du package
-print(os.path.dirname(gym_lowcostrobot.__file__))</code></pre>
+print(os.path.dirname(gym_lowcostrobot.__file__))
 
-    <p>Trouver le fichier <code>pick_place_cube.xml</code> : Sous Windows, utilisez PowerShell pour localiser le fichier :</p>
-    <pre><code>Get-ChildItem -Path C:\Anaconda3\Lib\site-packages\gym_lowcostrobot -Recurse -Filter "pick_place_cube.xml"</code></pre>
+Trouver le fichier pick_place_cube.xml : Sous Windows, utilisez PowerShell pour localiser le fichier :
 
-    <h3>Modification du fichier XML</h3>
-    <p>Remplacer le contenu du fichier <code>pick_place_cube.xml</code> : Utilisez le code suivant pour remplacer le contenu du fichier XML par ce texte corrigé :</p>
-    <pre><code>@'
+Get-ChildItem -Path C:\Anaconda3\Lib\site-packages\gym_lowcostrobot -Recurse -Filter "pick_place_cube.xml"
+
+
+Modification du fichier XML
+Remplacer le contenu du fichier pick_place_cube.xml : Utilisez le code suivant pour remplacer le contenu du fichier XML par ce texte corrigé :
+
+
+<code>
+@'
 <mujoco model="low_cost_robot scene">
     <compiler angle="radian" autolimits="true"/>
     <!-- The timestep has a big influence on the contacts stability -->
@@ -92,7 +62,5 @@ print(os.path.dirname(gym_lowcostrobot.__file__))</code></pre>
         <geom name="target_region" type="cylinder" pos=".06 .135 0.005" size="0.035 0.01" rgba="0 0 1 0.3" contype="0" conaffinity="0" />
     </worldbody>
 </mujoco>
-'@ | Set-Content "C:\Anaconda3\envs\RLrobotics\lib\site-packages\gym_lowcostrobot\assets\low_cost_robot_6dof\pick_place_cube.xml"</code></pre>
-
-</body>
-</html>
+'@ | Set-Content "C:\Anaconda3\envs\RLrobotics\lib\site-packages\gym_lowcostrobot\assets\low_cost_robot_6dof\pick_place_cube.xml"
+</code>
