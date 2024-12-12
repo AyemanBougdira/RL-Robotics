@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Installation et Configuration RLrobotics</title>
-</head>
-<body>
-    <h1>Instructions d'installation et de configuration pour RLrobotics</h1>
+# Instructions d'installation et de configuration pour RLrobotics
 
-    <h2>Étape 1 : Installation des dépendances</h2>
-    <p>Exécutez les commandes suivantes dans votre terminal pour créer un environnement Conda et installer les bibliothèques nécessaires :</p>
+## Étape 1 : Installation des dépendances
 
-    <pre>
+Exécutez les commandes suivantes dans votre terminal pour créer un environnement Conda et installer les bibliothèques nécessaires :
+
+```bash
 conda create -y -n RLrobotics python=3.10
 conda activate RLrobotics
 
@@ -19,30 +12,31 @@ pip install gym stable-baselines3
 pip install rl_zoo3
 pip install imageio[ffmpeg]
 pip install imageio[pyav]
-    </pre>
+```
 
-    <h2>Étape 2 : Correction de l'erreur convexhull</h2>
-    <p>L'erreur <strong>unrecognized attribute: 'convexhull'</strong> provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.</p>
+L'erreur unrecognized attribute: 'convexhull' provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.
 
-    <h3>Localisation du fichier XML</h3>
-    <p>Pour localiser le fichier XML, lancez le code suivant dans votre terminal Python :</p>
-    <pre>
+### Localisation du fichier XML
+
+```bash
 import gym_lowcostrobot
 import os
 
 # Affiche le chemin du package
 print(os.path.dirname(gym_lowcostrobot.__file__))
-    </pre>
+```
 
-    <p>Ensuite, utilisez PowerShell sous Windows pour localiser le fichier <code>pick_place_cube.xml</code> :</p>
-    <pre>
+Ensuite, sous Windows, utilisez PowerShell pour localiser le fichier pick_place_cube.xml :
+
+```bash
 Get-ChildItem -Path C:\Anaconda3\Lib\site-packages\gym_lowcostrobot -Recurse -Filter "pick_place_cube.xml"
-    </pre>
+```
 
-    <h3>Modification du fichier XML</h3>
-    <p>Pour corriger l'erreur, remplacez le contenu du fichier <code>pick_place_cube.xml</code> par le texte suivant :</p>
+Pour corriger l'erreur, remplacez le contenu du fichier pick_place_cube.xml par le texte suivant :
 
-    <pre>
+
+
+```bash
 @'
 <mujoco model="low_cost_robot scene">
     <compiler angle="radian" autolimits="true"/>
@@ -76,7 +70,4 @@ Get-ChildItem -Path C:\Anaconda3\Lib\site-packages\gym_lowcostrobot -Recurse -Fi
     </worldbody>
 </mujoco>
 '@ | Set-Content "C:\Anaconda3\envs\RLrobotics\lib\site-packages\gym_lowcostrobot\assets\low_cost_robot_6dof\pick_place_cube.xml"
-    </pre>
-
-</body>
-</html>
+```
