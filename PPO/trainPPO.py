@@ -10,7 +10,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 from stable_baselines3.common.evaluation import evaluate_policy
 
 
-def record_video(model, env, num_episodes=3, video_dir='./video', fps=30):
+def record_video(model, env, num_episodes=15, video_dir='./video', fps=30):
     """
     Enregistre les vidéos de simulations pour un modèle entraîné.
     
@@ -46,7 +46,7 @@ def record_video(model, env, num_episodes=3, video_dir='./video', fps=30):
             f"Episode {episode} enregistré : {video_path} - Récompense totale : {total_reward}")
 
 
-def train_ppo_model(env_id="PickPlaceCube-v0", total_timesteps=5000):
+def train_ppo_model(env_id="PickPlaceCube-v0", total_timesteps=100000):
     """
     Entraîne un modèle PPO sur un environnement donné.
 

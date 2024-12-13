@@ -8,6 +8,7 @@ Exécutez les commandes suivantes dans votre terminal pour créer un environneme
 conda create -y -n RLrobotics python=3.10
 conda activate RLrobotics
 
+pip install git+https://github.com/perezjln/gym-lowcostrobot.git
 pip install gym stable-baselines3
 pip install rl_zoo3
 pip install imageio[ffmpeg]
@@ -16,9 +17,9 @@ pip install imageio[pyav]
 
 ## ValueError: XML Error: Schema violation: unrecognized attribute: 'convexhull'
 
-L'erreur unrecognized attribute: 'convexhull' provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.
+L'erreur unrecognized attribute: 'convexhull' aprés l'execution du script validationenv.py provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.
 
-### Localisation du fichier XML
+### Localisation du fichier XML (executer test.py  pour trouver le chemin)
 
 ```bash
 import gym_lowcostrobot
@@ -28,13 +29,14 @@ import os
 print(os.path.dirname(gym_lowcostrobot.__file__))
 ```
 
-Ensuite, sous Windows, utilisez PowerShell pour localiser le fichier pick_place_cube.xml :
+le résultat est le suivant:
 
 ```bash
-Get-ChildItem -Path C:\Anaconda3\Lib\site-packages\gym_lowcostrobot -Recurse -Filter "pick_place_cube.xml"
+C:\Anaconda3\envs\RLrobotics\lib\site-packages\gym_lowcostrobot
 ```
 
-Pour corriger l'erreur, remplacez le contenu du fichier pick_place_cube.xml par le texte suivant :
+
+Pour corriger l'erreur, remplacez le contenu du fichier pick_place_cube.xml par le texte suivant (changer la dernier ligne par votre chemin)! :
 
  
 
