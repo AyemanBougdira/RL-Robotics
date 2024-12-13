@@ -14,6 +14,8 @@ pip install imageio[ffmpeg]
 pip install imageio[pyav]
 ```
 
+## ValueError: XML Error: Schema violation: unrecognized attribute: 'convexhull'
+
 L'erreur unrecognized attribute: 'convexhull' provient du fichier XML de configuration. Voici les étapes pour localiser et modifier ce fichier.
 
 ### Localisation du fichier XML
@@ -34,7 +36,7 @@ Get-ChildItem -Path C:\Anaconda3\Lib\site-packages\gym_lowcostrobot -Recurse -Fi
 
 Pour corriger l'erreur, remplacez le contenu du fichier pick_place_cube.xml par le texte suivant :
 
-
+ 
 
 ```bash
 @'
